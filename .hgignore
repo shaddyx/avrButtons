@@ -1,0 +1,12 @@
+syntax: glob
+*.a
+*.o
+*.d
+*.elf
+*.hex
+*.lst
+*.eep
+*.lss
+*.map
+*.mk
+*.dblite
