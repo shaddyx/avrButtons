@@ -11,8 +11,12 @@
 #define ADC_DIVIDER_64 6
 #define ADC_DIVIDER_128 7
 
+#define ADC_REFVALUE_MODE_EXTERNAL_AREF (0<<REFS1) | (0<<REFS0)
+#define ADC_REFVALUE_MODE_VCC (0<<REFS1) | (1<<REFS0)
+#define ADC_REFVALUE_MODE_INTERNAL_2_5 (1<<REFS1) | (1<<REFS0)
 
-uint8_t simpleAdcInit(uint16_t adcClock);
+
+uint8_t simpleAdcInit(uint8_t adcDivider, uint8_t adcRefValueMode);
 uint8_t simpleAdcStart(uint8_t channel);
 uint8_t simpleAdcIsBusy(void);
 int simpleAdcRead();
