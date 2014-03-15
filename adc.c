@@ -1,5 +1,5 @@
 #include <avr/io.h>
-uint8_t adcInit(uint16_t adcDivider){
+uint8_t simpleAdcInit(uint16_t adcDivider){
 	// Set ADCSRA Register with division factor 32
 	uint8_t adcPrescaller =  adcDivider;
 	ADCSRA  = (1<<ADEN) | adcPrescaller;
@@ -7,15 +7,15 @@ uint8_t adcInit(uint16_t adcDivider){
 	ADMUX = adcRefValueMode;
 }
 
-uint8_t adcStart(uint8_t channel){
+uint8_t simpleAdcStart(uint8_t channel){
 	ADMUX |= channel & 0b00000111;
 	ADCSRA  |= (1<<ADSC);
 }
 
-uint8_t adcIsBusy(void){
+uint8_t simpleAdcIsBusy(void){
 	return ADCSRA & (1<<ADSC);
 }
-int adcRead(){
+int simpleAdcRead(){
 	unsigned int adcValue = ADCW;	//Store ADC result
 	//ADCSRA |= (1<<ADIF);
 	return adcValue;

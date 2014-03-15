@@ -12,9 +12,9 @@
 #define ADC_DIVIDER_128 7
 
 
-uint8_t adcInit(uint16_t adcClock);
-uint8_t adcStart(uint8_t channel);
-uint8_t adcIsBusy(void);
-int adcRead();
+uint8_t simpleAdcInit(uint16_t adcClock);
+uint8_t simpleAdcStart(uint8_t channel);
+uint8_t simpleAdcIsBusy(void);
+int simpleAdcRead();
 
 #endif
