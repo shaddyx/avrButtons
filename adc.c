@@ -1,19 +1,22 @@
-
 #include <avr/io.h>
-#include <util/delay.h>
-#include "adc.h"
+uint8_t adcInit(uint16_t adcDivider){
+	// Set ADCSRA Register with division factor 32
+	uint8_t adcPrescaller =  adcDivider;
+	ADCSRA  = (1<<ADEN) | adcPrescaller;
+	uint8_t adcRefValueMode = (1<<REFS1) | (1<<REFS0);
+	ADMUX = adcRefValueMode;
+}
 
-#ifdef ADMUX
-	void adcInit () {
-	  ADMUX |= (1 << REFS0);
-	  ADCSRA = (1 << ADEN) | (7 << ADPS0);
-	}
+uint8_t adcStart(uint8_t channel){
+	ADMUX |= channel & 0b00000111;
+	ADCSRA  |= (1<<ADSC);
+}
 
-	uint16_t adcRead(uint8_t ch) {
-	  ADMUX |= ch;
-	  ADCSRA |= (1 << ADSC);
-	  while (!(ADCSRA & (1 << ADIF)));
-	  ADCSRA |= (1 << ADIF);
-	  return (ADC);
-	}
-#endif
+uint8_t adcIsBusy(void){
+	return ADCSRA & (1<<ADSC);
+}
+int adcRead(){
+	unsigned int adcValue = ADCW;	//Store ADC result
+	//ADCSRA |= (1<<ADIF);
+	return adcValue;
+}

@@ -46,7 +46,7 @@ LICENSE:
  */
  
 /**@{*/
-
+#if !defined(__AVR_ATtiny13__)
 
 #if (__GNUC__ * 100 + __GNUC_MINOR__) < 304
 #error "This library requires AVR-GCC 3.4 or later, update to newer AVR-GCC compiler !"
@@ -190,6 +190,6 @@ extern void uart1_puts_p(const char *s );
 
 /**@}*/
 
-
-#endif // UART_H 
+#endif
+#endif // UART_H
 

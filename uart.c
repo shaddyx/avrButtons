@@ -1,3 +1,4 @@
+
 /*************************************************************************
 Title:    Interrupt UART library with receive/transmit circular buffers
 Author:   Peter Fleury <pfleury@gmx.ch>   http://jump.to/fleury
@@ -45,7 +46,7 @@ LICENSE:
 /*
  *  constants and macros
  */
-
+#ifdef UART_RX_BUFFER_SIZE
 /* size of RX/TX buffers */
 #define UART_RX_BUFFER_MASK ( UART_RX_BUFFER_SIZE - 1)
 #define UART_TX_BUFFER_MASK ( UART_TX_BUFFER_SIZE - 1)
@@ -254,8 +255,6 @@ static volatile unsigned char UART1_RxHead;
 static volatile unsigned char UART1_RxTail;
 static volatile unsigned char UART1_LastRxError;
 #endif
-
-
 
 ISR (UART0_RECEIVE_INTERRUPT)	
 /*************************************************************************
@@ -686,4 +685,5 @@ void uart1_puts_p(const char *progmem_s )
 }/* uart1_puts_p */
 
 
+#endif
 #endif
