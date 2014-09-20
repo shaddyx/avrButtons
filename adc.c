@@ -1,9 +1,8 @@
 #include <avr/io.h>
+#ifdef ADSC
 uint8_t simpleAdcInit(uint8_t adcDivider, uint8_t adcRefValueMode){
-	// Set ADCSRA Register with division factor 32
 	uint8_t adcPrescaller =  adcDivider;
 	ADCSRA  = (1<<ADEN) | adcPrescaller;
-	//uint8_t adcRefValueMode = (1<<REFS1) | (1<<REFS0);
 	ADMUX = adcRefValueMode;
 }
 
@@ -20,3 +19,4 @@ int simpleAdcRead(){
 	//ADCSRA |= (1<<ADIF);
 	return adcValue;
 }
+#endif

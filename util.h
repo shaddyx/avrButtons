@@ -12,5 +12,9 @@
 #define cbi(reg, bit) (reg &= ~(1<<bit))
 #define ckbi(reg, bit) (reg & (1<<bit))
 #define xorbi(reg, bit) (reg ^ (1<<bit))
+#define ibi(reg, bit) (reg ^= (1<<bit))
+
+
+int makeRandom(int upper);
 
 #endif /* CONSTANTS_H_ */

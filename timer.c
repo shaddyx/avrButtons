@@ -16,9 +16,16 @@
 #define TIMER_CONF TCCR0B
 #define TIMER_COUNTER TCNT0
 #endif
+#define TIMER_MODE_BIT	16
+#if defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny13A__)
+	#define TIMER_MODE_BIT	8
+#endif
 
-
-#if F_CPU == 8000000
+#if F_CPU == 16000000
+	#define TIMER_DIVIDER 256
+	#define TIMER_QUANTUM 4
+	#define IMPULSES_PER_QUANTUM 125
+#elif F_CPU == 8000000
 	#define TIMER_DIVIDER 256
 	#define TIMER_QUANTUM 4
 	#define IMPULSES_PER_QUANTUM 125
@@ -57,7 +64,11 @@ void pollTimer(){
 	if (curValue >= lastValue) {
 		delta = curValue - lastValue;
 	} else {
+#if TIMER_MODE_BIT == 16
 		delta = curValue + (65535 - lastValue);
+#else
+		delta = curValue + (255 - lastValue);
+#endif
 	}
 
 	if (delta > IMPULSES_PER_QUANTUM) {

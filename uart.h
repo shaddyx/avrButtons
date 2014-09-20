@@ -46,7 +46,7 @@ LICENSE:
  */
  
 /**@{*/
-#if !defined(__AVR_ATtiny13__)
+#if !defined(__AVR_ATtiny13A__)  && !defined(__AVR_ATtiny13__) && !defined(__AVR_ATtiny45__)
 
 #if (__GNUC__ * 100 + __GNUC_MINOR__) < 304
 #error "This library requires AVR-GCC 3.4 or later, update to newer AVR-GCC compiler !"
